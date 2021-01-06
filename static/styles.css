@@ -24,6 +24,11 @@ p {
   transform: translate(-50%, -50%);
 }
 
+#Console img {
+  width:100%;
+  max-width: 540px;
+}
+
 
 #Keyboard {
   width:100%;

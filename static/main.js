@@ -314,6 +314,7 @@ function buttonDown(e){
             panDown();
             break;
         case 1:
+            update_values();
             toggleLights();
     }
 
@@ -327,4 +328,12 @@ function thrusterSend(thruster,power) {
     xmlHttp.send( null ); 
     return true;
 
+}
+
+function update_values() {
+    $SCRIPT_ROOT = "http://raspberrypi.local:8000/";
+    $.getJSON($SCRIPT_ROOT+"/_stuff",
+                function(data) {
+            console.log(data.cpu);
+        });
 }

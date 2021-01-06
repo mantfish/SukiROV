@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_url_path='')
@@ -103,6 +103,10 @@ def vertical(value):
     print("Vertical "+ value)
     return "recieved"
 
+@app.route('/_stuff', methods= ['GET'])
+def stuff():
+    cpu= "199"
+    return jsonify(cpu=cpu)
 
 
 if __name__ == "__main__":

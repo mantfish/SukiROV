@@ -25,7 +25,7 @@ document.addEventListener('keyup',stopKey);
 
 //starts the mainloop of the function
 
-var intervalID = setInterval(mainLoop, 50);
+var intervalID = setInterval(mainLoop, 100);
 
 //here is said function
 
@@ -235,11 +235,6 @@ function upPop() {
 
 //Here begin the gamepad code
 
-function buttonDown(e){
-    console.log("button pressed");
-    return true;
-}
-
 function buttonUp(e){
     console.log("button up");
     return true;
@@ -265,16 +260,10 @@ function sendAxisData(){
         var upAxis = (gamepad.axes[5]).toFixed(2);
 
         var zvalue = 0.0;
-//        var zAxis = (gamepad.axes[4]).toFixed(2);
- //       var panAxis = (gamepad.axes[?].toFixed(2))
-
-        //log each of the axis values *COMMENT OUT*
 
         /*
 
-        console.log("y axis: ",yAxis);
-        console.log("x axis: ",xAxis);
-        console.log("z axis: ",zAxis);
+        
 
         */
 
@@ -301,7 +290,9 @@ function sendAxisData(){
 
         thrusterSend("vertical",zvalue);
 
-        
+        console.log("left axis: ",leftAxis);
+        console.log("right axis: ",rightAxis);
+        console.log("z axis: ",zvalue);
 
         //send the value of the vertical thruster through
         
@@ -317,10 +308,10 @@ function buttonDown(e){
 
     switch (e.button){
         case 2:
-            panUp;
+            panUp();
             break;
         case 0:
-            panDown;
+            panDown();
             break;
         case 1:
             toggleLights();
@@ -332,7 +323,7 @@ function buttonDown(e){
 
 function thrusterSend(thruster,power) {
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", '/' + thruster + '/' + power , false ); // false for synchronous request
+    xmlHttp.open( "GET", '/' + thruster + '/' + power , true ); // false for synchronous request
     xmlHttp.send( null ); 
     return true;
 

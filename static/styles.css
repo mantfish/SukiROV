@@ -5,3 +5,11 @@ html {
   -o-background-size: cover;
   background-size: cover;
 }
+
+p {
+  display: inline-flex;
+  color: white;
+  background: rgba(0,0,0,0.5);
+  border-radius: 3px;
+  padding: 5px; 
+}

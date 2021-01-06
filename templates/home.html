@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="{{
-      url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
-    
-
+  
+    <script src="{{ url_for('static', filename='jquery-1.9.1.min.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <script src="{{ url_for('static', filename='main.js') }}"></script>
 
@@ -13,7 +10,19 @@
 
 <body>
 
-    <p>Battery voltage</p><p id = "voltage"></p>
+    <p>Battery voltage:<p id = "voltage"></p>
+
+    <div id = "footer">
+      <img src = "{{ url_for('static', filename='/images/keyboard.svg') }}" onclick="upPopKeyboard()" id = "footerimg"></img>
+      <img src = "{{ url_for('static', filename='/images/console.svg') }}" onclick="upPopConsole()"" id = "footerimg"></img>
+
+      <div id = "Keyboard">
+
+      <img src = "{{ url_for('static', filename='/images/KeyboardControls.png') }}" ></img>
+      
+      </div>
+
+    </div>
 
 
 </body>

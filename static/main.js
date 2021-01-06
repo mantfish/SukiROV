@@ -332,8 +332,9 @@ function thrusterSend(thruster,power) {
 
 function update_values() {
     $SCRIPT_ROOT = "http://raspberrypi.local:8000/";
-    $.getJSON($SCRIPT_ROOT+"/_stuff",
+    $.getJSON($SCRIPT_ROOT+"/updateValues",
                 function(data) {
-            console.log(data.cpu);
+            document.getElementById("voltage").innerHTML = data.cpu;
+            console.log(data.cup);
         });
 }

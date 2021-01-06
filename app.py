@@ -103,8 +103,8 @@ def vertical(value):
     print("Vertical "+ value)
     return "recieved"
 
-@app.route('/_stuff', methods= ['GET'])
-def stuff():
+@app.route('/updateValues', methods= ['GET'])
+def updateValues():
     cpu= "199"
     return jsonify(cpu=cpu)
 

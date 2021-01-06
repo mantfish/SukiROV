@@ -88,12 +88,12 @@ def lightsOff():
 
 #routes for keypad
 
-@app.route("/leftThruster/<value>")
+@app.route("/left/<value>")
 def leftThruster(value):
     print("left "+ value)
     return "recieved"
 
-@app.route("/rightThruster/<value>")
+@app.route("/right/<value>")
 def rightThruster(value):
     print("right " + value)
     return "recieved"
@@ -101,7 +101,7 @@ def rightThruster(value):
 @app.route("/vertical/<value>")
 def vertical(value):
     print("Vertical "+ value)
-    
+
 
 
 if __name__ == "__main__":

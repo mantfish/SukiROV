@@ -101,6 +101,7 @@ def rightThruster(value):
 @app.route("/vertical/<value>")
 def vertical(value):
     print("Vertical "+ value)
+    return "recieved"
 
 
 

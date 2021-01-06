@@ -25,7 +25,7 @@ document.addEventListener('keyup',stopKey);
 
 //starts the mainloop of the function
 
-var intervalID = setInterval(mainLoop, 100);
+var intervalID = setInterval(mainLoop, 50);
 
 //here is said function
 
@@ -256,12 +256,16 @@ function sendAxisData(){
     //if gamepad means if gamepad variablbe isn't null    
 
     if (gamepad){
-
         //define the axis in correlation with controller and floor the num of deimels
 
-        var yAxis = (gamepad.axes[1]).toFixed(2);
-        var xAxis = (gamepad.axes[0]).toFixed(2);  
-        var zAxis = (gamepad.axes[4]).toFixed(2);
+
+        var leftAxis = (gamepad.axes[1]).toFixed(2);  
+        var rightAxis = (gamepad.axes[4]).toFixed(2);
+        var downAxis = (gamepad.axes[2]).toFixed(2);
+        var upAxis = (gamepad.axes[5]).toFixed(2);
+
+        var zvalue = 0.0;
+//        var zAxis = (gamepad.axes[4]).toFixed(2);
  //       var panAxis = (gamepad.axes[?].toFixed(2))
 
         //log each of the axis values *COMMENT OUT*
@@ -274,63 +278,34 @@ function sendAxisData(){
 
         */
 
-        //send the value of the vertical thruster through
+        thrusterSend("left",leftAxis);
+        thrusterSend("right",rightAxis);
 
-        verticalThrusters = -1*zAxis;
-        thrusterSend("vertical",verticalThrusters)
-
-        //In this case the joystick is in the middle position
-
-        if(yAxis == 0){
-
-            //this means we send the opposite values to ensure max turning
-
-            leftThruster = xAxis
-            rightThruster = -1*xAxis
-
-            //log thruster values COMMENT OUT
-
-            console.log("right thruster: ",rightThruster);
-            console.log("left thruster: ",leftThruster);
-
-            //send the values to the thrusters
-
-            thrusterSend("left",leftThruster);
-            thrusterSend("right",rightThruster);
-
-            return true;
+        if (upAxis < -0.9){
+            if(downAxis < -0.9){
+                zvalue = 0.0;
+            }
+            if(downAxis > 0){
+                zvalue = -1*downAxis;
+            }
         }
         
-
-        if(xAxis > 0){  
-
-            //this is the strange circle equation, sometimes buggy
-
-            var leftThruster = -1*yAxis;
-            var rightThruster = (-1*yAxis)*(1-xAxis);
-
-            console.log("right thruster: ",rightThruster);
-            console.log("left thruster: ",leftThruster);
-
-            
-        }
         else{
-
-            //opposite circle equation, we have some kind of error here
-
-            var rightThruster = -1*yAxis;
-            var leftThruster = (-1*yAxis)*(1+xAxis);
-
-            console.log("right thruster: ",rightThruster);
-            console.log("left thruster: ",leftThruster);
-
-
+            if (upAxis > 0){
+                zvalue = upAxis;
+            }
+            else{
+                zvalue = 0;
+            }
         }
 
-        //send those values
+        thrusterSend("vertical",zvalue);
+
         
-        thrusterSend("left",leftThruster);
-        thrusterSend("right",rightThruster);
+
+        //send the value of the vertical thruster through
+        
+
     }
 
     return true;
@@ -341,10 +316,10 @@ function sendAxisData(){
 function buttonDown(e){
 
     switch (e.button){
-        case 6:
+        case 2:
             panUp;
             break;
-        case 7:
+        case 0:
             panDown;
             break;
         case 1:

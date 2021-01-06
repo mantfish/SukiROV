@@ -26,6 +26,7 @@ document.addEventListener('keyup',stopKey);
 //starts the mainloop of the function
 
 var intervalID = setInterval(mainLoop, 100);
+var valuesIntervalID = setInterval(update_values, 1000);
 
 //here is said function
 
@@ -238,7 +239,7 @@ function upPopKeyboard() {
   }
 
 function upPopConsole() {
-    var x = document.getElementById("Keyboard");
+    var x = document.getElementById("Console");
     if (x.style.display === "none") {
       x.style.display = "block";
     } else {
@@ -327,7 +328,6 @@ function buttonDown(e){
             panDown();
             break;
         case 1:
-            update_values();
             toggleLights();
     }
 

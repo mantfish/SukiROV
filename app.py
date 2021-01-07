@@ -66,8 +66,8 @@ def stopPan():
     print("stopPan")
     return "recieved"
 
-@app.route("/stopHorizotnal")
-def stopHorizotnal():
+@app.route("/stopHorizontal")
+def stopHorizontal():
     print("stopH")
     return "recieved"
 

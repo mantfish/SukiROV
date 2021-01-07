@@ -229,8 +229,8 @@ function flaskSend(url) {
 
 //function that displays the instructions to the Robot
 
-function upPopKeyboard() {
-    var x = document.getElementById("Keyboard");
+function displayElement(element) {
+    var x = document.getElementById(element);
     if (x.style.display === "none") {
       x.style.display = "block";
     } else {
@@ -238,14 +238,8 @@ function upPopKeyboard() {
     }
   }
 
-function upPopConsole() {
-    var x = document.getElementById("Console");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
-  }
+
+
 
 //Here begin the gamepad code
 

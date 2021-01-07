@@ -10,11 +10,17 @@
 
 <body>
 
-    <p>Battery voltage:<p id = "voltage"></p>
+    <div id = "sukiText">
+
+        <p>Battery voltage:<p id = "voltage"></p>
+
+    </div>
 
     <div id = "footer">
-      <img src = "{{ url_for('static', filename='/images/keyboard.svg') }}" onclick="upPopKeyboard()" id = "footerimg"></img>
-      <img src = "{{ url_for('static', filename='/images/console.svg') }}" onclick="upPopConsole()"" id = "footerimg"></img>
+      <img src = "{{ url_for('static', filename='/images/text.svg') }}" onclick="displayElement('sukiText')" id = "footerimg"></img>
+      <img src = "{{ url_for('static', filename='/images/keyboard.svg') }}" onclick="displayElement('Keyboard')" id = "footerimg"></img>
+      <img src = "{{ url_for('static', filename='/images/console.svg') }}" onclick="displayElement('Console')" id = "footerimg"></img>
+      
 
       <div id = "Keyboard">
 

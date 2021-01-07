@@ -6,7 +6,7 @@ html {
   background-size: cover;
 }
 
-p {
+#sukiText p {
   display: inline-flex;
   color: white;
   background: rgba(0,0,0,0.5);
@@ -15,8 +15,7 @@ p {
 }
 
 #Console {
-  width:100%;
-  max-width: 540px;
+  display: none;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -26,13 +25,12 @@ p {
 
 #Console img {
   width:100%;
-  max-width: 540px;
+  max-width: 600px;
 }
 
 
 #Keyboard {
-  width:100%;
-  max-width: 540px;
+  display: none;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -41,6 +39,12 @@ p {
   
 }
 
+#Keyboard img {
+  width:100%;
+  max-width: 700px;
+}
+
+
 #footerimg{
   width: 30px;
   padding: 5px;
@@ -48,7 +52,7 @@ p {
 }
 
 #footerimg:hover{
-  background-color: rgba(255, 255, 255, 0.5)
+  background-color: rgba(136, 136, 136, 0.5)
 }
 
 #footer {

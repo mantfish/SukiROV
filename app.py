@@ -109,6 +109,7 @@ def vertical(value):
 
 @app.route('/updateValues', methods= ['GET'])
 def updateValues():
+    print("asked")
     roll, pitch = request_values()
 
     return jsonify(roll=roll,pitch = pitch)
@@ -147,9 +148,16 @@ def request_values():
 if __name__ == "__main__":
     global isConnected
     try:
-        ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
+        ser = serial.Serial('/dev/ttyACM0', 115200, timeout=1)
         ser.flush()
         isConnected = True
+        print("***NANO CONNECTED***")
     except:
-        isConnected = False
+        try:
+            ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=1)
+            ser.flush()
+            isConnected = True
+            print("***NANO CONNECTED***")
+        except:
+            isConnected = False
     app.run(debug=True, host='0.0.0.0', port=8000) #set up the server in debug mode to the port 8000

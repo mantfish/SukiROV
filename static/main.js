@@ -26,7 +26,7 @@ document.addEventListener('keyup',stopKey);
 //starts the mainloop of the function
 
 var intervalID = setInterval(mainLoop, 100);
-var valuesIntervalID = setInterval(update_values, 1000);
+var valuesIntervalID = setInterval(update_values, 200);
 
 //here is said function
 
@@ -338,7 +338,7 @@ function thrusterSend(thruster,power) {
 }
 
 function update_values() {
-    $SCRIPT_ROOT = "http://raspberrypi.local:8000/";
+    $SCRIPT_ROOT = "http://raspberrypi.local:8000";
     $.getJSON($SCRIPT_ROOT+"/updateValues",
                 function(data) {
             document.getElementById("Roll").innerHTML = data.roll;

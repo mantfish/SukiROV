@@ -1,4 +1,6 @@
 from flask import Flask, render_template, jsonify
+import serial
+import time
 
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_url_path='')
@@ -46,11 +48,13 @@ def right():
 
 @app.route("/panUp")
 def panUp():
+    serialWrite('b')
     print("panUp")
     return "recieved"
 
 @app.route("/panDown")
 def panDown():
+    serialWrite('a')
     print("panDown")
     return "recieved"
 
@@ -105,9 +109,47 @@ def vertical(value):
 
 @app.route('/updateValues', methods= ['GET'])
 def updateValues():
-    cpu= "199"
-    return jsonify(cpu=cpu)
+    roll, pitch = request_values()
+
+    return jsonify(roll=roll,pitch = pitch)
+
+def serialWrite(towrite):
+
+    if isConnected == True:
+        ser.write(towrite.encode())
+
+def request_values():
+    if isConnected == False:
+        roll = 0
+        pitch = 0
+        yaw = 0
+    else:
+        ser.write(b"1\n")
+        if ser.in_waiting > 0:
+            roll = ser.readline().decode('utf-8').rstrip()
+            print(roll)
+        else:
+            roll = 0
+
+        ser.write(b"2\n")
+        if ser.in_waiting > 0:
+            pitch = ser.readline().decode('utf-8').rstrip()
+            print(pitch)
+        else:
+            pitch = 0
+
+    
+    return roll, pitch
+    
+    
 
 
 if __name__ == "__main__":
-     app.run(debug=True, host='0.0.0.0', port=8000) #set up the server in debug mode to the port 8000
+    global isConnected
+    try:
+        ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
+        ser.flush()
+        isConnected = True
+    except:
+        isConnected = False
+    app.run(debug=True, host='0.0.0.0', port=8000) #set up the server in debug mode to the port 8000

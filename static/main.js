@@ -341,7 +341,9 @@ function update_values() {
     $SCRIPT_ROOT = "http://raspberrypi.local:8000/";
     $.getJSON($SCRIPT_ROOT+"/updateValues",
                 function(data) {
-            document.getElementById("voltage").innerHTML = data.cpu;
-            console.log(data.cup);
+            document.getElementById("Roll").innerHTML = data.roll;
+            document.getElementById("Pitch").innerHTML = data.pitch;
+            console.log(data.roll);
+            console.log(data.pitch)
         });
 }

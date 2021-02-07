@@ -146,35 +146,42 @@ def vertical(value):
 def updateValues():
     print("asked")
     roll, pitch = request_values()
+    print(roll,pitch)
 
     return jsonify(roll=roll,pitch = pitch)
 
 def serialWrite(towrite):
     towrite = str(towrite)
-    towrite += "\n"
+    towrite = towrite + "\n"
     towrite = towrite.encode('utf-8')
+    print(towrite)
+
 
     if isConnected == True:
-        ser.write(towrite.encode())
+        ser.write(towrite)
 
 def request_values():
     if isConnected == False:
         roll = 0
         pitch = 0
     else:
-        ser.write(120)
+        serialWrite(120)
+        while ser.in_waiting == 0: pass
         if ser.in_waiting > 0:
             roll = ser.readline().decode('utf-8').rstrip()
             print(roll)
         else:
             roll = 0
 
-        ser.write(121)
+        serialWrite(121)
+        while ser.in_waiting == 0: pass
         if ser.in_waiting > 0:
             pitch = ser.readline().decode('utf-8').rstrip()
             print(pitch)
         else:
             pitch = 0
+
+
 
     
     return roll, pitch
@@ -197,4 +204,5 @@ if __name__ == "__main__":
             print("***NANO CONNECTED***")
         except:
             isConnected = False
+    time.sleep(8)
     app.run(debug=True, host='0.0.0.0', port=8000) #set up the server in debug mode to the port 8000

@@ -166,6 +166,7 @@ function sendRightSwing() {
 //panning function
 
 function panUp(){
+    update_values();
     flaskSend("panUp");
 }
 function panDown() {
@@ -343,7 +344,7 @@ function update_values() {
                 function(data) {
             document.getElementById("Roll").innerHTML = data.roll;
             document.getElementById("Pitch").innerHTML = data.pitch;
-            console.log(data.roll);
-            console.log(data.pitch)
+     //       console.log(data.roll);
+       //     console.log(data.pitch)
         });
 }

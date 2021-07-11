@@ -7,6 +7,8 @@ True. check about:config to change it*/
 
 //variable for lights, initially set to off
 var isOn = false;
+var isLasOn = false;
+var isSmallOn = false;
 const log = document.getElementById('log');
 
 //add listeners for gamepad
@@ -166,7 +168,7 @@ function sendRightSwing() {
 //panning function
 
 function panUp(){
-    update_values();
+//    update_values();
     flaskSend("panUp");
 }
 function panDown() {
@@ -215,6 +217,38 @@ function toggleLights() {
     if (isOn == false){
         flaskSend("on");
         isOn = true;
+        return true;
+    }
+}
+
+function toggleSmallLights() {
+    console.log(isSmallOn);
+    
+    if (isSmallOn == true){
+        flaskSend("smallOff");
+        isSmallOn = false;
+        return true;
+    }
+    
+    if (isSmallOn == false){
+        flaskSend("smallOn");
+        isSmallOn = true;
+        return true;
+    }
+}
+
+function toggleLaser() {
+    console.log(isLasOn);
+    
+    if (isLasOn == true){
+        flaskSend("lasOff");
+        isLAsOn = false;
+        return true;
+    }
+    
+    if (isLasOn == false){
+        flaskSend("lasOn");
+        isLasOn = true;
         return true;
     }
 }
@@ -324,6 +358,10 @@ function buttonDown(e){
             break;
         case 1:
             toggleLights();
+        case 3:
+            toggleSmallLights();
+        case 10:
+            toggleLaser();
     }
 
 }
@@ -344,6 +382,7 @@ function update_values() {
                 function(data) {
             document.getElementById("Roll").innerHTML = data.roll;
             document.getElementById("Pitch").innerHTML = data.pitch;
+            document.getElementById("Voltage").innerHTML = data.voltage;
      //       console.log(data.roll);
        //     console.log(data.pitch)
         });

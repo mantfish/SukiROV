@@ -118,35 +118,59 @@ def lightsOff():
     print("Off")
     return "recieved"
 
+@app.route("/smallOn")
+def lightsOn():
+    serialWrite(211)
+    print("On")
+    return "recieved"
+
+@app.route("/smallOff")
+def lightsOff():
+    serialWrite(210)
+    print("Off")
+    return "recieved"
+
+@app.route("/lasOn")
+def lightsOn():
+    serialWrite(221)
+    print("On")
+    return "recieved"
+
+@app.route("/lasOff")
+def lightsOff():
+    serialWrite(220)
+    print("Off")
+    return "recieved"
+
 #routes for keypad
 
 @app.route("/left/<value>")
 def leftThruster(value):
-    value = int(value)
+    value = float(value)
     serialWrite(lhCode+value*0.5*100)
-    print("left "+ value)
+#    print("left "+ value)
     return "recieved"
 
 @app.route("/right/<value>")
 def rightThruster(value):
-    value = int(value)
+    value = float(value)
     serialWrite(rhCode+value*0.5*100)
-    print("right " + value)
+#    print("right " + value)
     return "recieved"
 
 @app.route("/vertical/<value>")
 def vertical(value):
-    value = int(value)
+    value = float(value)
     serialWrite(lvCode+value*0.5*100)
     serialWrite(rvCode+value*0.5*100)
-    print("Vertical "+ value)
+#    print("Vertical "+ value)
     return "recieved"
 
 @app.route('/updateValues', methods= ['GET'])
 def updateValues():
     print("asked")
-    roll, pitch = request_values()
-    print(roll,pitch)
+    roll, pitch, voltage = request_values()
+    print(roll,pitch, voltage)
 
     return jsonify(roll=roll,pitch = pitch)
 
@@ -154,9 +178,7 @@ def serialWrite(towrite):
     towrite = str(towrite)
     towrite = towrite + "\n"
     towrite = towrite.encode('utf-8')
-    print(towrite)
-
-
+#    print(towrite)
     if isConnected == True:
         ser.write(towrite)
 
@@ -181,10 +203,18 @@ def request_values():
         else:
             pitch = 0
 
+        serialWrite(110)
+        while ser.in_waiting == 0: pass
+        if ser.in_waiting > 0:
+            voltage = ser.readline().decode('utf-8').rstrip()
+            print(voltage)
+        else:
+            voltage = 0
+
 
 
     
-    return roll, pitch
+    return roll, pitch, voltage
     
     
 

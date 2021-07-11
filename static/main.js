@@ -302,40 +302,25 @@ function sendAxisData(){
         var downAxis = (gamepad.axes[2]).toFixed(2);
         var upAxis = (gamepad.axes[5]).toFixed(2);
 
-        var zvalue = 0.0;
-
-        /*
-
-        
-
-        */
+        var zValue = 0.0;
 
         thrusterSend("left",leftAxis);
         thrusterSend("right",rightAxis);
 
-        if (upAxis < -0.9){
-            if(downAxis < -0.9){
-                zvalue = 0.0;
-            }
-            if(downAxis > 0){
-                zvalue = -1*downAxis;
-            }
-        }
-        
-        else{
-            if (upAxis > 0){
-                zvalue = upAxis;
-            }
-            else{
-                zvalue = 0;
-            }
+        if (gamepad.buttons[7].pressed == True && gamepad.buttons[6].pressed == False){
+            zValue = upAxis;
         }
 
-        thrusterSend("vertical",zvalue);
+        if (gamepad.buttons[7].pressed == False && gamepad.buttons[6].pressed == True){
+            zValue = -1*downAxis;
+        }
+
+
+        thrusterSend("vertical",zValue);
 
         console.log("left axis: ",leftAxis);
         console.log("right axis: ",rightAxis);
-        console.log("z axis: ",zvalue);
+        console.log("z axis: ",zValue);
 
         //send the value of the vertical thruster through
         

@@ -119,25 +119,25 @@ def lightsOff():
     return "recieved"
 
 @app.route("/smallOn")
-def lightsOn():
+def smallLightsOn():
     serialWrite(211)
     print("On")
     return "recieved"
 
 @app.route("/smallOff")
-def lightsOff():
+def smallLightsOff():
     serialWrite(210)
     print("Off")
     return "recieved"
 
 @app.route("/lasOn")
-def lightsOn():
+def lasLightsOn():
     serialWrite(221)
     print("On")
     return "recieved"
 
 @app.route("/lasOff")
-def lightsOff():
+def lasLightsOff():
     serialWrite(220)
     print("Off")
     return "recieved"
@@ -186,6 +186,7 @@ def request_values():
     if isConnected == False:
         roll = 0
         pitch = 0
+        voltage = 0
     else:
         serialWrite(120)
         while ser.in_waiting == 0: pass
@@ -212,8 +213,6 @@ def request_values():
             voltage = 0
 
 
-
-    
     return roll, pitch, voltage
     
     
